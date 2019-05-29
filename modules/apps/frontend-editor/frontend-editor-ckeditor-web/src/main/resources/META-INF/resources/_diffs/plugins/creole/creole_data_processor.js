@@ -215,7 +215,7 @@
 					data = data.replace(REGEX_NEWLINE, STR_BLANK);
 					data = data.replace(REGEX_ZERO_WIDTH_SPACE, STR_BLANK);
 					data = data.replace(REGEX_NON_BREAKING_SPACE, STR_SPACE);
-					
+
 					if (!instance._verbatim) {
 						data = data.replace(
 							REGEX_CREOLE_RESERVED_CHARACTERS,
