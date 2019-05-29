@@ -11,9 +11,13 @@
 
 	var REGEX_NEWLINE = /\r?\n/g;
 
+	var REGEX_NON_BREAKING_SPACE = /\u00a0/g;
+
 	var REGEX_NOT_WHITESPACE = /[^\t\n\r ]/;
 
 	var REGEX_URL_PREFIX = /^(?:\/|https?|ftp):\/\//i;
+
+	var REGEX_ZERO_WIDTH_SPACE = /\u200B/g;
 
 	var STR_BLANK = '';
 
@@ -209,7 +213,9 @@
 			if (data) {
 				if (!instance._skipParse) {
 					data = data.replace(REGEX_NEWLINE, STR_BLANK);
-
+					data = data.replace(REGEX_ZERO_WIDTH_SPACE, STR_BLANK);
+					data = data.replace(REGEX_NON_BREAKING_SPACE, STR_SPACE);
+					
 					if (!instance._verbatim) {
 						data = data.replace(
 							REGEX_CREOLE_RESERVED_CHARACTERS,
@@ -289,6 +295,7 @@
 				tagName = tagName.toLowerCase();
 
 				var regexHeader = REGEX_HEADER.exec(tagName);
+				var elementContent = element.textContent.toString().replace(REGEX_ZERO_WIDTH_SPACE, STR_BLANK);
 
 				if (tagName == TAG_PARAGRAPH) {
 					instance._handleParagraph(element, listTagsIn, listTagsOut);
@@ -299,10 +306,10 @@
 				else if (tagName == 'a') {
 					instance._handleLink(element, listTagsIn, listTagsOut);
 				}
-				else if (tagName == 'strong' || tagName == 'b') {
+				else if ((tagName == 'strong' || tagName == 'b') && (elementContent.length > 0)) {
 					instance._handleStrong(element, listTagsIn, listTagsOut);
 				}
-				else if (tagName == 'em' || tagName == 'i') {
+				else if ((tagName == 'em' || tagName == 'i') && (elementContent.length > 0)) {
 					instance._handleEm(element, listTagsIn, listTagsOut);
 				}
 				else if (tagName == 'img') {
