@@ -239,19 +239,24 @@ AUI.add(
 				_valueEditingLanguageId: function() {
 					var instance = this;
 
-					var portletNamespace = instance.get('portletNamespace');
+					var languageId;
 
-					var languageId = instance._getURLParameter(
-						portletNamespace,
-						'languageId'
-					);
+					var formNode = instance.getFormNode();
+
+					if (formNode) {
+						var portletNamespace = instance.get('portletNamespace');
+
+						var languageIdNodeId = portletNamespace + 'languageId';
+
+						formNode.get('children').each(function(node) {
+							if (node.get('id') === languageIdNodeId) {
+								languageId = node.val();
+							}
+						});
+					}
 
 					if (!languageId) {
-						languageId = themeDisplay.getLanguageId();
-
-						if (!languageId) {
-							languageId = instance.get('defaultLanguageId');
-						}
+						languageId = instance.get('defaultLanguageId');
 					}
 
 					return languageId;
