@@ -302,6 +302,26 @@ public class StagingBarPortlet extends MVCPortlet {
 			}
 		}
 
+		HttpServletRequest originalHttpServletRequest =
+			_portal.getOriginalServletRequest(httpServletRequest);
+
+		String setRecentLayoutRevisionId =
+			originalHttpServletRequest.getParameter(
+				"setRecentLayoutRevisionId");
+
+		if (Boolean.parseBoolean(setRecentLayoutRevisionId)) {
+			try {
+				_staging.setRecentLayoutRevisionId(
+					themeDisplay.getUser(),
+					layoutRevision.getLayoutSetBranchId(),
+					layoutRevision.getPlid(),
+					layoutRevision.getLayoutRevisionId());
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
 		renderRequest.setAttribute(WebKeys.GROUP, group);
 		renderRequest.setAttribute(WebKeys.LAYOUT, layout);
 		renderRequest.setAttribute(WebKeys.LAYOUT_REVISION, layoutRevision);

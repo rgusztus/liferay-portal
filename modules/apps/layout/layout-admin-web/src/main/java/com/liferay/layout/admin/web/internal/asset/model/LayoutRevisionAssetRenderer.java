@@ -150,6 +150,8 @@ public class LayoutRevisionAssetRenderer
 			layoutURL = HttpUtil.addParameter(
 				layoutURL, "layoutRevisionId",
 				_layoutRevision.getLayoutRevisionId());
+			layoutURL = HttpUtil.addParameter(
+				layoutURL, "setRecentLayoutRevisionId", "true");
 
 			return layoutURL;
 		}
