@@ -227,15 +227,10 @@ if (portletTitleBasedNavigation) {
 			</c:if>
 
 			<c:if test="<%= showComments && fileEntry.isRepositoryCapabilityProvided(CommentCapability.class) %>">
-
-				<%
-				Discussion discussion = CommentManagerUtil.getDiscussion(user.getUserId(), scopeGroupId, dlViewFileVersionDisplayContext.getDiscussionClassName(), dlViewFileVersionDisplayContext.getDiscussionClassPK(), new ServiceContextFunction(request));
-				%>
-
 				<liferay-comment:discussion
 					className="<%= dlViewFileVersionDisplayContext.getDiscussionClassName() %>"
 					classPK="<%= dlViewFileVersionDisplayContext.getDiscussionClassPK() %>"
-					discussion="<%= discussion %>"
+					discussionUserId="<%= user.getUserId() %>"
 					formName="fm2"
 					ratingsEnabled="<%= dlPortletInstanceSettings.isEnableCommentRatings() %>"
 					redirect="<%= currentURL %>"

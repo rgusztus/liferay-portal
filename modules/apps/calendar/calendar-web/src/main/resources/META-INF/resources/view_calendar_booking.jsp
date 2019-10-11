@@ -159,15 +159,10 @@ AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.getEntry(CalendarBookin
 		</aui:fieldset>
 
 		<c:if test="<%= calendar.isEnableComments() %>">
-
-			<%
-			Discussion discussion = CommentManagerUtil.getDiscussion(user.getUserId(), scopeGroupId, CalendarBooking.class.getName(), calendarBooking.getCalendarBookingId(), new ServiceContextFunction(request));
-			%>
-
 			<liferay-comment:discussion
 				className="<%= CalendarBooking.class.getName() %>"
 				classPK="<%= calendarBooking.getCalendarBookingId() %>"
-				discussion="<%= discussion %>"
+				discussionUserId="<%= user.getUserId() %>"
 				formName="fm2"
 				ratingsEnabled="<%= true %>"
 				redirect="<%= currentURL %>"

@@ -24,15 +24,10 @@ String viewMode = ParamUtil.getString(request, "viewMode");
 %>
 
 <div class="content-metadata-asset-addon-entry content-metadata-comments">
-
-	<%
-	Discussion discussion = CommentManagerUtil.getDiscussion(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), JournalArticle.class.getName(), articleDisplay.getResourcePrimKey(), new ServiceContextFunction(request));
-	%>
-
 	<liferay-comment:discussion
 		className="<%= JournalArticle.class.getName() %>"
 		classPK="<%= articleDisplay.getResourcePrimKey() %>"
-		discussion="<%= discussion %>"
+		discussionUserId="<%= user.getUserId() %>"
 		hideControls="<%= viewMode.equals(Constants.PRINT) %>"
 		ratingsEnabled="<%= commentsContentMetadataAssetAddonEntry.isCommentsRatingsSelected(request) && !viewMode.equals(Constants.PRINT) %>"
 		redirect="<%= currentURLObj.toString() %>"
