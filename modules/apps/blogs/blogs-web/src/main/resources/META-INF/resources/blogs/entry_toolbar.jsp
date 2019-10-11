@@ -32,7 +32,7 @@ BlogsPortletInstanceConfiguration blogsPortletInstanceConfiguration = BlogsPortl
 		<div class="autofit-col">
 
 			<%
-			int messagesCount = CommentManagerUtil.getCommentsCount(BlogsEntry.class.getName(), entry.getEntryId());
+			int messagesCount = BlogsUtil.getCommentsCount(entry);
 			%>
 
 			<portlet:renderURL var="viewEntryCommentsURL">
