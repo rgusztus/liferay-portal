@@ -42,6 +42,10 @@ public class DiscussionTag extends IncludeTag {
 		return _discussion;
 	}
 
+	public long getDiscussionUserId() {
+		return _discussionUserId;
+	}
+
 	public String getFormName() {
 		return _formName;
 	}
@@ -80,6 +84,10 @@ public class DiscussionTag extends IncludeTag {
 
 	public void setDiscussion(Discussion discussion) {
 		_discussion = discussion;
+	}
+
+	public void setDiscussionUserId(long discussionUserId) {
+		_discussionUserId = discussionUserId;
 	}
 
 	public void setFormAction(String formAction) {
@@ -121,6 +129,7 @@ public class DiscussionTag extends IncludeTag {
 		_className = null;
 		_classPK = 0;
 		_discussion = null;
+		_discussionUserId = 0;
 		_formAction = null;
 		_formName = "fm";
 		_hideControls = false;
@@ -198,6 +207,8 @@ public class DiscussionTag extends IncludeTag {
 		httpServletRequest.setAttribute(
 			"liferay-comment:discussion:discussion", _discussion);
 		httpServletRequest.setAttribute(
+			"liferay-comment:discussion:discussionUserId", _discussionUserId);
+		httpServletRequest.setAttribute(
 			"liferay-comment:discussion:editorURL",
 			getEditorURL(httpServletRequest));
 		httpServletRequest.setAttribute(
@@ -226,6 +237,7 @@ public class DiscussionTag extends IncludeTag {
 	private String _className;
 	private long _classPK;
 	private Discussion _discussion;
+	private long _discussionUserId;
 	private String _formAction;
 	private String _formName = "fm";
 	private boolean _hideControls;

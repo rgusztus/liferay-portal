@@ -34,6 +34,12 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>Deprecated as of 7.2.0, with no direct replacement.</description>
+			<name>discussionUserId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>formAction</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

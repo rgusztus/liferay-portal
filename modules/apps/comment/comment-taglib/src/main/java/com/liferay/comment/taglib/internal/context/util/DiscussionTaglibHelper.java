@@ -47,6 +47,20 @@ public class DiscussionTaglibHelper {
 		return _classPK;
 	}
 
+	public long getDiscussionUserId() {
+		if (_discussionUserId == null) {
+			_discussionUserId = GetterUtil.getLong(
+				_httpServletRequest.getAttribute(
+					"liferay-comment:discussion:discussionUserId"));
+
+			if (_discussionUserId == null) {
+				_discussionUserId = getUserId();
+			}
+		}
+
+		return _discussionUserId;
+	}
+
 	public String getFormAction() {
 		if (_formAction == null) {
 			_formAction = (String)_httpServletRequest.getAttribute(
@@ -133,6 +147,7 @@ public class DiscussionTaglibHelper {
 	private Boolean _assetEntryVisible;
 	private String _className;
 	private Long _classPK;
+	private Long _discussionUserId;
 	private String _formAction;
 	private String _formName;
 	private Boolean _hideControls;
