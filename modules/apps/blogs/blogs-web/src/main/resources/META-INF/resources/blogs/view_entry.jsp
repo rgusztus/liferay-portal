@@ -119,26 +119,19 @@ BlogsPortletInstanceConfiguration blogsPortletInstanceConfiguration = BlogsPortl
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<c:if test="<%= blogsPortletInstanceConfiguration.enableComments() %>">
-
-				<%
-				Discussion discussion = CommentManagerUtil.getDiscussion(user.getUserId(), scopeGroupId, BlogsEntry.class.getName(), entry.getEntryId(), new ServiceContextFunction(request));
-				%>
-
-				<c:if test="<%= discussion != null %>">
-					<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED && entry.isAllowTrackbacks() && Validator.isNotNull(entry.getUrlTitle()) %>">
-						<aui:input inlineLabel="left" name="trackbackURL" type="resource" value='<%= PortalUtil.getLayoutFullURL(themeDisplay.getLayout(), themeDisplay, false) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/trackback/" + entry.getUrlTitle() %>' />
-					</c:if>
-
-					<liferay-comment:discussion
-						className="<%= BlogsEntry.class.getName() %>"
-						classPK="<%= entry.getEntryId() %>"
-						discussion="<%= discussion %>"
-						formName="fm2"
-						ratingsEnabled="<%= blogsPortletInstanceConfiguration.enableCommentRatings() %>"
-						redirect="<%= currentURL %>"
-						userId="<%= entry.getUserId() %>"
-					/>
+				<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED && entry.isAllowTrackbacks() && Validator.isNotNull(entry.getUrlTitle()) %>">
+					<aui:input inlineLabel="left" name="trackbackURL" type="resource" value='<%= PortalUtil.getLayoutFullURL(themeDisplay.getLayout(), themeDisplay, false) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/trackback/" + entry.getUrlTitle() %>' />
 				</c:if>
+
+				<liferay-comment:discussion
+					className="<%= BlogsEntry.class.getName() %>"
+					classPK="<%= entry.getEntryId() %>"
+					discussionUserId="<%= user.getUserId() %>"
+					formName="fm2"
+					ratingsEnabled="<%= blogsPortletInstanceConfiguration.enableCommentRatings() %>"
+					redirect="<%= currentURL %>"
+					userId="<%= entry.getUserId() %>"
+				/>
 			</c:if>
 		</div>
 	</div>
