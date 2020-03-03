@@ -143,6 +143,13 @@
 
 				var authToken = searchParams.get('p_auth') || '';
 
+				var authTokenIndex = authToken.indexOf('#');
+
+				authToken = authToken.substring(
+					0,
+					authTokenIndex != -1 ? authTokenIndex : authToken.length
+				);
+
 				form.append(
 					'<input name="p_auth" type="hidden" value="' +
 						authToken +
